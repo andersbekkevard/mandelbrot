@@ -52,3 +52,4 @@
 2025-06-15 15:08:58 | mandelbrot-codex.py | easy | avg_compute_time=0.2395s
 2025-06-15 15:09:05 | mandelbrot-parallel.py | easy | avg_compute_time=0.6433s
 2025-06-15 15:09:13 | mandelbrot-vanilla.py | easy | avg_compute_time=1.0213s
+2025-06-15 15:12:01 | mandelbrot-rust.py | easy | avg_compute_time=0.0118s

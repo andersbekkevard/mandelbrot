@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import RectangleSelector
 from matplotlib.backend_bases import MouseButton
-from mandelbrot_rust import compute_mandelbrot
+from mandelbrot_rust import compute_mandelbrot  # type: ignore
 from infrastructure.logger import MandelbrotLogger
 import os
 from infrastructure.config import (
