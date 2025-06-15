@@ -1,8 +1,0 @@
-/Users/andersbekkevard/dev/python/mandelbrot/mandelbrot_rust/target/debug/build/target-lexicon-f41e4a5a142889c0/build_script_build-f41e4a5a142889c0: /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/build.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/data_model.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/triple.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/targets.rs
-
-/Users/andersbekkevard/dev/python/mandelbrot/mandelbrot_rust/target/debug/build/target-lexicon-f41e4a5a142889c0/build_script_build-f41e4a5a142889c0.d: /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/build.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/data_model.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/triple.rs /Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/targets.rs
-
-/Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/build.rs:
-/Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/data_model.rs:
-/Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/triple.rs:
-/Users/andersbekkevard/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/target-lexicon-0.12.16/src/targets.rs:

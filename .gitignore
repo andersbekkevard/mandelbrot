@@ -76,6 +76,7 @@ wheels/
 
 # Rust
 /target/
+**/target/
 **/*.rs.bk
 Cargo.lock
 *.pdb
@@ -87,13 +88,23 @@ Cargo.lock
 **/build/
 **/debug/
 **/release/
+**/*.rcgu.o
+**/*.rmeta
+**/*.rlib
+**/*.dylib
+**/*.d
+**/incremental/
+**/.fingerprint/
+**/.cargo-lock
+**/dep-*
+**/lib-*
+**/build_script_*
 
 # Metal
 *.metallib
 *.air
 *.metal
 *.metallibd
-
 
 # PyTorch
 *.pt
