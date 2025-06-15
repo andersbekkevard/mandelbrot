@@ -6,19 +6,21 @@ This project implements and benchmarks various approaches to computing the Mande
 
 Latest benchmark results (average computation time in seconds):
 
-| Rank | Implementation          | Easy   | Medium | Hard   |
-|------|------------------------|--------|--------|--------|
-| 1    | Metal GPU              | 0.003  | 0.004  | 0.022  |
-| 2    | Rust                   | 0.013  | 0.046  | 1.371  |
-| 3    | Numba                  | 0.055  | 0.173  | 5.011  |
-| 4    | Numba Parallel         | 0.072  | 0.088  | 0.940  |
-| 5    | NumPy                  | 0.194  | 0.745  | -      |
-| 6    | Codex                  | 0.294  | 0.759  | -      |
-| 7    | Python Parallel        | 0.594  | 1.048  | -      |
-| 8    | Pure Python            | 0.898  | 4.600  | -      |
-| 9    | PyTorch GPU            | -      | 4.909  | 30.098 |
+| Rank | Implementation    | Easy   | Medium | Hard    |
+|------|------------------|--------|--------|---------|
+| 1    | Metal (GPU)      | 0.0029 | 0.0042 | 0.0234  |
+| 2    | Rust             | 0.0138 | 0.0475 | 1.3709  |
+| 3    | Numba Parallel   | 0.0638 | 0.0847 | 0.9253  |
+| 4    | Numba            | 0.0779 | 0.1822 | 5.0108  |
+| 5    | NumPy            | 0.2086 | 0.7475 | 30.4738 |
+| 6    | Codex (OOP-impl) | 0.2886 | 0.7662 | 28.2540 |
+| 7    | Python Parallel  | 0.5938 | 1.0478 | 25.0336 |
+| 8    | Torch (GPU)      | 1.7891 | 4.5363 | 62.1589 |
+| 9    | Pure Python      | 1.1413 | 4.7807 | 93.8319 |
 
-Metal GPU is consistently fastest across all modes, with Rust and Numba providing the best CPU-based alternatives. PyTorch GPU shows significantly higher computation times compared to Metal.
+- Lower is better. All times in seconds. All implementations tested on all presets.
+
+Metal (GPU) is consistently fastest, followed by Rust and Numba (parallel). Pure Python and Torch are the slowest, especially for harder presets.
 
 ## Implementations
 

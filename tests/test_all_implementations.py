@@ -19,13 +19,15 @@ from infrastructure.config import DEFAULT_VIEW
 
 # List of implementations to test
 IMPLEMENTATIONS = [
-    # "mandelbrot-vanilla.py",
-    # "mandelbrot-numpy.py",
-    # "mandelbrot-parallel.py",
+    "mandelbrot-vanilla.py",
+    "mandelbrot-numpy.py",
+    "mandelbrot-parallel.py",
     "mandelbrot-numba.py",
     "mandelbrot-numba-parallel.py",
     "mandelbrot-rust.py",
-    # "mandelbrot-codex.py"
+    "mandelbrot-codex.py",
+    "mandelbrot-metal.py",
+    "mandelbrot-torch.py",
 ]
 
 # Define zoom regions to test
