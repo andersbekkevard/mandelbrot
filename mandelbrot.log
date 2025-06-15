@@ -44,3 +44,11 @@
 2025-06-15 14:48:11 | mandelbrot-numba.py | hard | avg_compute_time=3.0877s
 2025-06-15 14:49:46 | mandelbrot-metal.py | hard | avg_compute_time=0.0255s
 2025-06-15 14:51:20 | mandelbrot-metal.py | hard | avg_compute_time=0.0187s
+2025-06-15 14:58:20 | mandelbrot-numba-parallel.py | hard | avg_compute_time=0.8656s
+2025-06-15 14:58:33 | mandelbrot-parallel.py | medium | avg_compute_time=1.0399s
+2025-06-15 14:58:43 | mandelbrot-metal.py | medium | avg_compute_time=0.0044s
+2025-06-15 15:08:39 | mandelbrot-parallel.py | easy | avg_compute_time=0.5827s
+2025-06-15 15:08:52 | mandelbrot-metal.py | easy | avg_compute_time=0.0026s
+2025-06-15 15:08:58 | mandelbrot-codex.py | easy | avg_compute_time=0.2395s
+2025-06-15 15:09:05 | mandelbrot-parallel.py | easy | avg_compute_time=0.6433s
+2025-06-15 15:09:13 | mandelbrot-vanilla.py | easy | avg_compute_time=1.0213s

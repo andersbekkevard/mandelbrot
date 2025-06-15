@@ -5,7 +5,12 @@ from contextlib import contextmanager
 from datetime import datetime
 import atexit
 from collections import defaultdict
-from infrastructure.config import CURRENT_PRESET
+import sys
+import os
+
+# Add the infrastructure directory to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from config import CURRENT_PRESET
 
 
 class MandelbrotLogger:
