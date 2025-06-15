@@ -1,9 +1,16 @@
 import matplotlib.pyplot as plt
 from matplotlib.widgets import RectangleSelector
 from matplotlib.backend_bases import MouseButton
-from logger import MandelbrotLogger
+from infrastructure.logger import MandelbrotLogger
 import os
-from config import WIDTH, HEIGHT, MAX_ITER, DEFAULT_VIEW, FIGURE_SIZE, COLORMAP
+from infrastructure.config import (
+    WIDTH,
+    HEIGHT,
+    MAX_ITER,
+    DEFAULT_VIEW,
+    FIGURE_SIZE,
+    COLORMAP,
+)
 
 # Initialize view and figure
 view = list(DEFAULT_VIEW)

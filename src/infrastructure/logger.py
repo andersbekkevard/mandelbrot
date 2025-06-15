@@ -1,10 +1,11 @@
 import time
+import logging
 import os
 from contextlib import contextmanager
 from datetime import datetime
 import atexit
 from collections import defaultdict
-from config import CURRENT_PRESET
+from infrastructure.config import CURRENT_PRESET
 
 
 class MandelbrotLogger:
