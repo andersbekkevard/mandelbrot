@@ -26,13 +26,14 @@ METAL_SHADER = """
 using namespace metal;
 
 kernel void mandelbrot(device float* result [[buffer(0)]],
-                      constant float& re_min [[buffer(1)]],
-                      constant float& re_max [[buffer(2)]],
-                      constant float& im_min [[buffer(3)]],
-                      constant float& im_max [[buffer(4)]],
-                      constant int& max_iter [[buffer(5)]],
-                      constant int& width [[buffer(6)]],
-                      constant int& height [[buffer(7)]],
+                      device atomic_uint* total_iterations [[buffer(1)]],
+                      constant float& re_min [[buffer(2)]],
+                      constant float& re_max [[buffer(3)]],
+                      constant float& im_min [[buffer(4)]],
+                      constant float& im_max [[buffer(5)]],
+                      constant int& max_iter [[buffer(6)]],
+                      constant int& width [[buffer(7)]],
+                      constant int& height [[buffer(8)]],
                       uint2 position [[thread_position_in_grid]]) {
     // Calculate complex number c
     float c_re = re_min + (re_max - re_min) * position.x / (width - 1);
@@ -54,6 +55,9 @@ kernel void mandelbrot(device float* result [[buffer(0)]],
     
     // Store result
     result[position.y * width + position.x] = i;
+    
+    // Add to total iterations (atomic operation)
+    atomic_fetch_add_explicit(total_iterations, i, memory_order_relaxed);
 }
 """
 
@@ -83,8 +87,16 @@ class MandelbrotMetal:
         self.result_buffer = self.device.newBufferWithLength_options_(
             WIDTH * HEIGHT * 4, Metal.MTLResourceStorageModeShared
         )
+        self.iterations_buffer = self.device.newBufferWithLength_options_(
+            4, Metal.MTLResourceStorageModeShared
+        )
 
     def compute(self, re_min, re_max, im_min, im_max):
+        # Reset iterations counter
+        np.frombuffer(self.iterations_buffer.contents().as_buffer(4), dtype=np.uint32)[
+            0
+        ] = 0
+
         # Create command buffer
         command_buffer = self.command_queue.commandBuffer()
         compute_encoder = command_buffer.computeCommandEncoder()
@@ -94,26 +106,27 @@ class MandelbrotMetal:
 
         # Set buffers
         compute_encoder.setBuffer_offset_atIndex_(self.result_buffer, 0, 0)
+        compute_encoder.setBuffer_offset_atIndex_(self.iterations_buffer, 0, 1)
         compute_encoder.setBytes_length_atIndex_(
-            np.array([re_min], dtype=np.float32).tobytes(), 4, 1
+            np.array([re_min], dtype=np.float32).tobytes(), 4, 2
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([re_max], dtype=np.float32).tobytes(), 4, 2
+            np.array([re_max], dtype=np.float32).tobytes(), 4, 3
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([im_min], dtype=np.float32).tobytes(), 4, 3
+            np.array([im_min], dtype=np.float32).tobytes(), 4, 4
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([im_max], dtype=np.float32).tobytes(), 4, 4
+            np.array([im_max], dtype=np.float32).tobytes(), 4, 5
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([MAX_ITER], dtype=np.int32).tobytes(), 4, 5
+            np.array([MAX_ITER], dtype=np.int32).tobytes(), 4, 6
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([WIDTH], dtype=np.int32).tobytes(), 4, 6
+            np.array([WIDTH], dtype=np.int32).tobytes(), 4, 7
         )
         compute_encoder.setBytes_length_atIndex_(
-            np.array([HEIGHT], dtype=np.int32).tobytes(), 4, 7
+            np.array([HEIGHT], dtype=np.int32).tobytes(), 4, 8
         )
 
         # Set grid size
@@ -136,7 +149,12 @@ class MandelbrotMetal:
             dtype=np.float32,
         ).reshape(HEIGHT, WIDTH)
 
-        return result.astype(np.int32)
+        # Get total iterations
+        total_iterations = np.frombuffer(
+            self.iterations_buffer.contents().as_buffer(4), dtype=np.uint32
+        )[0]
+
+        return result.astype(np.int32), total_iterations
 
 
 # Initialize Metal compute
@@ -151,12 +169,25 @@ def draw():
     ax.clear()
     fig.suptitle(os.path.basename(__file__), fontsize=14, fontweight="bold")
     with logger.timeit("Compute Mandelbrot"):
-        m = mandelbrot(*view)
+        m, total_iterations = mandelbrot(*view)
+
+    # Format the total iterations for display
+    if total_iterations >= 1e9:
+        iterations_str = f"{total_iterations/1e9:.1f}B"
+    elif total_iterations >= 1e6:
+        iterations_str = f"{total_iterations/1e6:.1f}M"
+    elif total_iterations >= 1e3:
+        iterations_str = f"{total_iterations/1e3:.1f}K"
+    else:
+        iterations_str = str(total_iterations)
+
     ax.imshow(
         m, extent=(view[0], view[1], view[2], view[3]), cmap=COLORMAP, origin="lower"
     )
     ax.set_title(
-        f"Mandelbrot Set (drag to zoom, click to reset)\nResolution: {WIDTH}x{HEIGHT}, Max Iterations: {MAX_ITER}"
+        f"Mandelbrot Set (drag to zoom, click to reset)\n"
+        f"Resolution: {WIDTH}x{HEIGHT}, Max Iterations: {MAX_ITER}\n"
+        f"Total Computations: {iterations_str}"
     )
     ax.set_xlabel("Re")
     ax.set_ylabel("Im")
