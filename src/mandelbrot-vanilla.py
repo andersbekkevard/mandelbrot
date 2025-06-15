@@ -3,22 +3,22 @@ from matplotlib.widgets import RectangleSelector
 from matplotlib.backend_bases import MouseButton
 from logger import MandelbrotLogger
 import os
+from config import WIDTH, HEIGHT, MAX_ITER, DEFAULT_VIEW, FIGURE_SIZE, COLORMAP
 
-W, H, MAX_ITER = 800, 600, 100  # Standardized for benchmarking
-DEFAULT_VIEW = (-2.0, 1.0, -1.0, 1.0)
+# Initialize view and figure
 view = list(DEFAULT_VIEW)
-fig, ax = plt.subplots(figsize=(8, 6))
+fig, ax = plt.subplots(figsize=FIGURE_SIZE)
 logger = MandelbrotLogger(__file__)
 
 
 # Pure Python Mandelbrot calculation (no numpy)
 def mandelbrot(re_min, re_max, im_min, im_max):
     data = []
-    for y in range(H):
+    for y in range(HEIGHT):
         row = []
-        im = im_min + (im_max - im_min) * y / (H - 1)
-        for x in range(W):
-            re = re_min + (re_max - re_min) * x / (W - 1)
+        im = im_min + (im_max - im_min) * y / (HEIGHT - 1)
+        for x in range(WIDTH):
+            re = re_min + (re_max - re_min) * x / (WIDTH - 1)
             c = complex(re, im)
             z = 0
             count = 0
@@ -36,9 +36,11 @@ def draw():
     with logger.timeit("Compute Mandelbrot"):
         m = mandelbrot(*view)
     ax.imshow(
-        m, extent=(view[0], view[1], view[2], view[3]), cmap="hot", origin="lower"
+        m, extent=(view[0], view[1], view[2], view[3]), cmap=COLORMAP, origin="lower"
     )
-    ax.set_title("Mandelbrot Set (drag to zoom, click to reset)")
+    ax.set_title(
+        f"Mandelbrot Set (drag to zoom, click to reset)\nResolution: {WIDTH}x{HEIGHT}, Max Iterations: {MAX_ITER}"
+    )
     ax.set_xlabel("Re")
     ax.set_ylabel("Im")
     plt.draw()

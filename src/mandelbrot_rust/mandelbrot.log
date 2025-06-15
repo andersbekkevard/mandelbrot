@@ -1,0 +1,7 @@
+2025-06-15 13:49:45 | logger.py | avg_compute_time=0.0954s
+2025-06-15 13:50:04 | mandelbrot-rust.py | avg_compute_time=0.0178s
+2025-06-15 13:50:14 | mandelbrot-rust.py | avg_compute_time=0.0141s
+2025-06-15 13:55:17 | mandelbrot-rust.py | avg_compute_time=0.5009s
+2025-06-15 13:55:35 | mandelbrot-numba.py | avg_compute_time=2.5746s
+2025-06-15 13:57:53 | mandelbrot-numba-parallel.py | medium | avg_compute_time=0.1709s
+2025-06-15 13:58:52 | mandelbrot-vanilla.py | medium | avg_compute_time=2.4319s

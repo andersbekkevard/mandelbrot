@@ -1,0 +1,1 @@
+source mandelbrot/bin/activate
