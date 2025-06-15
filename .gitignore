@@ -19,15 +19,38 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# Virtual Environment
+# Python virtual environment
 venv/
 env/
 ENV/
-.env
-.venv
-env.bak/
-venv.bak/
+
+# Python logs
+*.log
+
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+*.pdb
+
+# Metal
+*.metallib
+*.air
+*.metal
+
+# CUDA
+*.cubin
+*.ptx
+*.fatbin
+
+# PyTorch
+*.pt
+*.pth
+*.onnx
+*.trt
+*.engine
 
 # IDE
 .idea/
@@ -36,10 +59,9 @@ venv.bak/
 *.swo
 .DS_Store
 
-# Logs
-*.log
-logs/
-log/
+# Virtual Environment
+env.bak/
+venv.bak/
 
 # Unit test / coverage reports
 htmlcov/
@@ -57,7 +79,6 @@ coverage.xml
 .ipynb_checkpoints
 
 # Distribution / packaging
-.Python
 build/
 develop-eggs/
 dist/
@@ -75,7 +96,6 @@ wheels/
 *.egg
 
 # Rust
-/target/
 **/target/
 **/*.rs.bk
 Cargo.lock
