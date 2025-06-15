@@ -99,3 +99,12 @@ Each implementation offers different trade-offs between:
 - Performance
 - Hardware requirements
 - Maintainability
+
+## Hardware Used
+
+The benchmarks and results in this project were obtained using the following hardware:
+
+- **Model:** Mac16,8
+- **CPU:** Apple M4 Pro (12 cores)
+- **Memory:** 24 GB
+- **GPU:** Apple M4 Pro
