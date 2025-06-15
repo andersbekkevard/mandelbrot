@@ -1,0 +1,14 @@
+[package]
+name = "mandelbrot_rust"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "mandelbrot_rust"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.19", features = ["extension-module"] }
+numpy = "0.19"
+rayon = "1.8"  # For parallel processing
+ndarray = "0.15"  # For array operations
