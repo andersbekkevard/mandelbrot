@@ -24,12 +24,12 @@ Metal (GPU) is consistently fastest, followed by Rust and Numba (parallel). Pure
 
 ## Mandelbrot Set Visualizations
 
+### Numba Parallel Implementation
+![Mandelbrot Numba Parallel](images/mandelbrot-numba-parallel.png)
+
 ### Metal Implementation
 ![Mandelbrot Metal 1](images/mandelbrot-metal-1.png)
 ![Mandelbrot Metal 2](images/mandelbrot-metal-2.png)
-
-### Numba Parallel Implementation
-![Mandelbrot Numba Parallel](images/mandelbrot-numba-parallel.png)
 
 ## Implementations
 
