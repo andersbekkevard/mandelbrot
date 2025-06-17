@@ -22,6 +22,15 @@ Latest benchmark results (average computation time in seconds):
 
 Metal (GPU) is consistently fastest, followed by Rust and Numba (parallel). Pure Python and Torch are the slowest, especially for harder presets.
 
+## Mandelbrot Set Visualizations
+
+### Metal Implementation
+![Mandelbrot Metal 1](images/mandelbrot-metal-1.png)
+![Mandelbrot Metal 2](images/mandelbrot-metal-2.png)
+
+### Numba Parallel Implementation
+![Mandelbrot Numba Parallel](images/mandelbrot-numba-parallel.png)
+
 ## Implementations
 
 The project includes several implementations of the Mandelbrot set computation:
@@ -50,12 +59,66 @@ Results are logged to `mandelbrot.log` and can be viewed using the `print_stats(
 
 ## Requirements
 
-- Python 3.x
-- NumPy
-- Numba
-- PyTorch (for GPU implementation)
-- Rust (for Rust implementation)
-- Apple Metal (for Metal implementation)
+This project includes several implementations, each with its own dependencies. Below is a breakdown by implementation:
+
+### General
+- **Python 3.8+**
+- **pip** (for Python package management)
+
+### Python Implementations
+- **NumPy** (`numpy>=1.21`): Core array operations for most implementations.
+- **Numba** (`numba>=0.56`): JIT compilation for fast CPU and parallel execution (Numba and Numba Parallel).
+- **PyTorch** (`torch>=2.0`): GPU acceleration for the PyTorch implementation (supports CUDA and Apple MPS backends).
+- **matplotlib** (`matplotlib>=3.5`): Visualization for all implementations.
+
+Install with:
+```bash
+pip install numpy numba torch matplotlib
+```
+
+### Rust Implementation
+- **Rust toolchain** (https://rustup.rs/)
+- **Python bindings for Rust** (via [PyO3](https://pyo3.rs/))
+- **Rust dependencies** (see `src/mandelbrot_rust/Cargo.toml`):
+  - `pyo3 = { version = "0.19", features = ["extension-module"] }` (Python bindings)
+  - `numpy = "0.19"` (NumPy array support)
+  - `rayon = "1.8"` (Parallel processing)
+  - `ndarray = "0.15"` (Array operations)
+
+To build the Rust extension:
+```bash
+cd src/mandelbrot_rust
+maturin develop  # or use poetry/maturin to build and install
+```
+
+### Apple Metal Implementation (macOS only)
+- **Apple Metal**: Requires macOS 11+ and Apple Silicon or supported Intel Macs.
+- **Python Metal bindings**: Use [`metalgpu`](https://pypi.org/project/metalgpu/) (`metalgpu>=1.0.5` as of June 2024) for Python access to Metal API.
+- **MetalKit**: Provided by macOS system frameworks.
+
+Install with:
+```bash
+pip install metalgpu
+python -m metalgpu build  # Compile the C library after install
+```
+
+### Summary Table
+| Implementation         | Python Packages                | Rust Crates                | System Requirements           |
+|-----------------------|-------------------------------|----------------------------|-------------------------------|
+| Pure Python           | numpy, matplotlib              |                            |                               |
+| NumPy                 | numpy, matplotlib              |                            |                               |
+| Numba                 | numpy, numba, matplotlib       |                            |                               |
+| Numba Parallel        | numpy, numba, matplotlib       |                            |                               |
+| Python Parallel       | numpy, matplotlib              |                            |                               |
+| PyTorch (GPU)         | torch, numpy, matplotlib       |                            | CUDA or Apple MPS (optional)  |
+| Apple Metal (GPU)     | metalgpu, numpy, matplotlib    |                            | macOS 11+, Apple Silicon      |
+| Rust                  | numpy, matplotlib              | pyo3, numpy, rayon, ndarray| Rust toolchain                |
+
+- For Apple Metal, you must have a compatible Mac and install the `metalgpu` Python package.
+- For Rust, install Rust via [rustup](https://rustup.rs/) and use `maturin` or `poetry` to build the Python extension.
+- For PyTorch GPU, CUDA (NVIDIA) or MPS (Apple Silicon) is required for hardware acceleration, but CPU fallback is supported.
+
+See each implementation's script for further details or troubleshooting tips.
 
 ## Usage
 

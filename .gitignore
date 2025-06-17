@@ -131,4 +131,7 @@ Cargo.lock
 *.pth
 *.ckpt
 *.safetensors
-torch.save/ 
+torch.save/
+
+# Mandelbrot venv
+mandelbrot/ 
