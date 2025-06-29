@@ -26,7 +26,7 @@ PRESETS = {
 }
 
 # Current preset selection
-CURRENT_PRESET = "easy"  # Change this to switch between presets
+CURRENT_PRESET = "hard"  # Change this to switch between presets
 
 # Default view coordinates (re_min, re_max, im_min, im_max)
 DEFAULT_VIEW = (-2.0, 1.0, -1.0, 1.0)
