@@ -1,3 +1,7 @@
 numpy
 numba
-torch 
+torch
+matplotlib
+metalgpu
+pyobjc-framework-Metal
+pyobjc-framework-MetalKit

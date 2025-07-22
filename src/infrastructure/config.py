@@ -26,13 +26,17 @@ PRESETS = {
 }
 
 # Current preset selection
-CURRENT_PRESET = "hard"  # Change this to switch between presets
+CURRENT_PRESET = "medium"  # Change this to switch between presets
 
 # Default view coordinates (re_min, re_max, im_min, im_max)
 DEFAULT_VIEW = (-2.0, 1.0, -1.0, 1.0)
 
 # Visualization parameters
+# Available matplotlib colormaps (examples, see full list in matplotlib docs):
+# Perceptually Uniform: 'viridis', 'plasma', 'inferno', 'magma', 'cividis', 'turbo', 'twilight', 'twilight_shifted'
+# Sequential: 'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGn', 'YlGnBu', 'BuGn', 'PuBuGn'
 COLORMAP = "hot"
+COLORMAP = "hot" if COLORMAP == "" else COLORMAP
 
 # Export the current preset's parameters
 preset = PRESETS[CURRENT_PRESET]
